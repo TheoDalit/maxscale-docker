@@ -14,3 +14,34 @@ threads=auto
 # this enables external access to the REST API outside of localhost
 # please review / modify for any public / non development environments
 admin_host=0.0.0.0
+
+[accounts_east]
+type=server
+address=192.168.56.102
+port=3306
+
+[accounts_west]
+type=server
+address=192.168.122.85
+port=3306
+
+[Sharded-Service]
+type=service
+router=schemarouter
+servers=accounts_west,accounts_east
+user=sharduser
+password=123
+
+[Sharded-Service-Listener]
+type=listener
+service=Sharded-Service
+protocol=MariaDBClient
+port=4000
+
+[MySQL-Monitor]
+type=monitor
+module=mariadbmon
+servers=accounts_west,accounts_east
+user=monitoruser
+password=123+123
+monitor_interval=1000
