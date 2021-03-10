@@ -2,13 +2,13 @@
 import mariadb
 import sys
 
-# Connect to MariaDB Platform
+# Connect to MariaDB Platform https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
 try:
     conn = mariadb.connect(
         user="maxuser",
         password="maxpwd",
         host="127.0.0.1",
-        port=4006,
+        port=4000,
         database="zipcodes_one"
 
     )
@@ -25,7 +25,6 @@ z2 = "SELECT * FROM zipcodes_two.zipcodes_two"
 cur.execute(z1)
 cur.execute(z2)
 
-#conn.commit()
 result = cur.fetchall()
 for row in result:
     print (row)
