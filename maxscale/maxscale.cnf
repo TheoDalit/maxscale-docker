@@ -14,3 +14,43 @@ threads=auto
 # this enables external access to the REST API outside of localhost
 # please review / modify for any public / non development environments
 admin_host=0.0.0.0
+
+[server1]
+type=server
+address=master
+port=3306
+protocol=MariaDBBackend
+
+[server2]
+type=server
+address=master2
+port=3306
+protocol=MariaDBBackend
+
+# Monitor for the servers
+# This will keep MaxScale aware of the state of the servers.
+# MySQL Monitor documentation:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.3/Documentation/Monitors/MariaDB-Monitor.md
+
+[Mariadb-Monitor]
+type=monitor
+module=mariadbmon
+servers=server1,server2
+user=maxuser
+password=maxpwd
+auto_failover=true
+auto_rejoin=true
+monitor_interval=1000
+
+[Sharded-Service]
+type=service
+router=schemarouter
+servers=server1,server2
+user=maxuser
+password=maxpwd
+
+[Sharded-Service-Listener]
+type=listener
+service=Sharded-Service
+protocol=MariaDBClient
+port=4000
