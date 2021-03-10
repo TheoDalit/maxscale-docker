@@ -2,6 +2,7 @@
 import mariadb
 import sys
 
+# https://stackoverflow.com/questions/37261665/using-python-to-query-multiple-sql-databases-on-different-servers
 # Connect to MariaDB Platform https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
 try:
     conn1 = mariadb.connect(
