@@ -4,7 +4,15 @@ import sys
 
 # Connect to MariaDB Platform https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
 try:
-    conn = mariadb.connect(
+    conn1 = mariadb.connect(
+        user="maxuser",
+        password="maxpwd",
+        host="127.0.0.1",
+        port=4000,
+
+    )
+
+    conn2 = mariadb.connect(
         user="maxuser",
         password="maxpwd",
         host="127.0.0.1",
@@ -16,18 +24,20 @@ except mariadb.Error as e:
     sys.exit(1)
 
 # Get Cursor
-cur = conn.cursor()
+cur1 = conn1.cursor()
+cur2 = conn2.cursor()
 
-#z1 = "SELECT * FROM zipcodes_one.zipcodes_one"
-#z2 = "SELECT * FROM zipcodes_two.zipcodes_two"
+cur1.execute("SELECT * FROM zipcodes_one.zipcodes_one")
+cur2.execute("SELECT * FROM zipcodes_two.zipcodes_two")
 
-#cur.execute(z1)
-#cur.execute(z2)
 
-cur.execute("SELECT * FROM zipcodes_one.zipcodes_one JOIN zipcodes_two.zipcodes_two")
-
-result = cur.fetchall()
-for row in result:
+result1 = cur1.fetchall()
+for row in result1:
     print (row)
 
-conn.close()
+result2 = cur2.fetchall()
+for row in result2:
+    print (row)
+
+conn1.close()
+conn2.close()
