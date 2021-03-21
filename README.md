@@ -1,10 +1,5 @@
-# MariaDB MaxScale Docker image
-
-This Docker image runs the latest 2.4 version of MariaDB MaxScale.
-
--	[Travis CI:  
-	![build status badge](https://img.shields.io/travis/mariadb-corporation/maxscale-docker/master.svg)](https://travis-ci.org/mariadb-corporation/maxscale-docker/branches)
-
+# Real World Project: Database Shard
+This project will use docker containers that will set up a sharded database. There is a python script provided that will connect, query, and demonstrate the merged database.
 
 ## Building
 
@@ -48,7 +43,7 @@ Quit MariDB by typing `quit;`.
 
 ## Querying the database
 
-This will query zipcodes_one and output the last 10 rows
+This will query `zipcodes_one` and output the last 10 rows
 
 ```
 SELECT * FROM zipcodes_one.zipcodes_one LIMIT 9990,10;
@@ -72,7 +67,7 @@ SELECT * FROM zipcodes_one.zipcodes_one LIMIT 9990,10;
 10 rows in set (0.004 sec)
 ```
 
-This will query zipcodes_two and output the first 10 rows
+This will query `zipcodes_two` and output the first 10 rows
 
 ```
 SELECT * FROM zipcodes_two.zipcodes_two LIMIT 10;
@@ -96,7 +91,7 @@ SELECT * FROM zipcodes_two.zipcodes_two LIMIT 10;
 10 rows in set (0.001 sec)
 ```
 
-This will query zipcodes_one and output the largest zipcode
+This will query `zipcodes_one` and output the largest zipcode
 
 ```
 SELECT * FROM zipcodes_one.zipcodes_one ORDER BY zipcode DESC LIMIT 1;
@@ -110,7 +105,7 @@ SELECT * FROM zipcodes_one.zipcodes_one ORDER BY zipcode DESC LIMIT 1;
 +---------+-------------+------------+-------+--------------+-----------+------------+---------------------+---------------+-----------------+---------------------+------------+
 ```
 
-This will query zipcodes_two and output the smallest zipcode
+This will query `zipcodes_two` and output the smallest zipcode
 
 ```
 SELECT * FROM zipcodes_two.zipcodes_two ORDER BY zipcode LIMIT 1;
@@ -127,7 +122,7 @@ SELECT * FROM zipcodes_two.zipcodes_two ORDER BY zipcode LIMIT 1;
 
 ## Querying the database with the python script
 
-The python script will query both tables in the database and will output last 10 rows of zipcodes_one, first 10 rows of zipcodes_two, largest zipcode in zipcodes_one, and smallest zipcode in zipcodes_two.
+The python script will query both tables in the database and will output last 10 rows of `zipcodes_one`, first 10 rows of `zipcodes_two`, largest zipcode in `zipcodes_one`, and smallest zipcode in `zipcodes_two`.
 Run the query python script
 
 ```
@@ -167,7 +162,7 @@ The smallest zipcode from zipcodes_two
 
 ## Shutting down the docker containers
 
-To shut down the docker container
+To shut down the docker containers
 
 ```
 docker-compose down -v
