@@ -13,43 +13,34 @@ try:
 
     )
 
-    conn2 = mariadb.connect(
-        user="maxuser",
-        password="maxpwd",
-        host="127.0.0.1",
-        port=4000,
-
-    )
 except mariadb.Error as e:
     print(f"Error connecting to MariaDB Platform: {e}")
     sys.exit(1)
 
 # Get Cursor
-cur1 = conn1.cursor()
-cur2 = conn2.cursor()
+cur = conn1.cursor()
 
 
 print('The last 10 rows from zipcodes_one')
-cur1.execute("SELECT * FROM zipcodes_one.zipcodes_one LIMIT 9990,10")
-result1 = cur1.fetchall()
+cur.execute("SELECT * FROM zipcodes_one.zipcodes_one LIMIT 9990,10")
+result1 = cur.fetchall()
 for row in result1:
     print (row)
 
 print('The first 10 rows from zipcodes_two')
-cur2.execute("SELECT * FROM zipcodes_two.zipcodes_two LIMIT 10")
-result2 = cur2.fetchall()
+cur.execute("SELECT * FROM zipcodes_two.zipcodes_two LIMIT 10")
+result2 = cur.fetchall()
 for row in result2:
     print (row)
 
 print('The largest zipcode from zipcodes_one')
-cur1.execute("SELECT * FROM zipcodes_one.zipcodes_one ORDER BY zipcode DESC LIMIT 1")
-result3 = cur1.fetchall()
+cur.execute("SELECT * FROM zipcodes_one.zipcodes_one ORDER BY zipcode DESC LIMIT 1")
+result3 = cur.fetchall()
 print(result3)
 
 print('The smallest zipcode from zipcodes_two')
-cur2.execute("SELECT * FROM zipcodes_two.zipcodes_two ORDER BY zipcode LIMIT 1")
-result4 = cur2.fetchall()
+cur.execute("SELECT * FROM zipcodes_two.zipcodes_two ORDER BY zipcode LIMIT 1")
+result4 = cur.fetchall()
 print(result4)
 
 conn1.close()
-conn2.close()
